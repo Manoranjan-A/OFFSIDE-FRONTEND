@@ -40,51 +40,73 @@
         
         /* Turf category section */
         .turf-category {
-            padding: 40px 20px;
+            padding: 60px 30px;
             text-align: center;
             background: url('turf1.jpg') center/cover no-repeat;
             position: relative;
             color: #fff;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
         }
 
         .turf-category h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            font-weight: 500;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
         }
 
         .turf-cards {
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            justify-content: space-around;
+            gap: 25px;
+            flex-wrap: wrap;
         }
 
         .turf-card {
-            background-color: rgba(30, 30, 30, 0.9);
-            border-radius: 10px;
-            width: 150px;
-            padding: 20px;
+            background-color: rgba(45, 45, 45, 0.9);
+            border-radius: 15px;
+            width: 160px;
+            padding: 25px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             color: #fff;
+            cursor: pointer;
         }
 
         .turf-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
         }
 
         .turf-card img {
-            width: 60px;
-            margin-bottom: 10px;
+            width: 70px;
+            margin-bottom: 15px;
         }
 
         .turf-card h3 {
-            font-size: 18px;
-            margin-top: 10px;
-            font-weight: 500;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: 600;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Link styling for the Badminton card */
+        .badminton-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .turf-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .turf-card {
+                width: 80%;
+                margin-bottom: 20px;
+            }
         }
 
         /* What people love about us section */
@@ -179,12 +201,6 @@
             cursor: pointer;
         }
 
-        .turf-card a {
-            color: inherit; /* Inherit text color */
-            text-decoration: none; /* Remove underline */
-            display: block; /* Make the anchor fill the card */
-            height: 100%; /* Ensure full height */
-        }
     </style>
 </head>
 <body>
@@ -201,7 +217,35 @@
     <main>
         <section class="turf-category">
             <h2>Turf Category</h2>
-            <div class="turf-cards" id="turfCards"></div>
+            <div class="turf-cards">
+                
+                <!-- Football -->
+                <div class="turf-card">
+                    <img src="football-icon.png" alt="Football Icon">
+                    <h3>Football</h3>
+                </div>
+
+                <!-- Basketball -->
+                <div class="turf-card">
+                    <img src="basketball-icon.jpg" alt="Basketball Icon">
+                    <h3>Basketball</h3>
+                </div>
+
+                <!-- Cricket -->
+                <div class="turf-card">
+                    <img src="cricket-icon.jpg" alt="Cricket Icon">
+                    <h3>Cricket</h3>
+                </div>
+
+                <!-- Badminton with Link to booking.html -->
+                <div class="turf-card badminton-card">
+                    <a href="http://localhost:4000">
+                        <img src="badminton-icon.jpg" alt="Badminton Icon">
+                        <h3>Badminton</h3>
+                    </a>
+                </div>
+
+            </div>
         </section>
 
         <!-- Feedback Section -->
@@ -232,26 +276,8 @@
 
     <!-- JavaScript to handle feedback and turf categories -->
     <script>
-        // Fetch and display turfs
+        // Fetch and display feedbacks
         window.onload = function() {
-            fetch('http://localhost:3000/turfs')
-            .then(response => response.json())
-            .then(data => {
-                const turfCardsContainer = document.getElementById('turfCards');
-                turfCardsContainer.innerHTML = ''; // Clear existing content
-
-                data.forEach(turf => {
-                    const turfCard = `
-                        <div class="turf-card">
-                            <img src="${turf.icon}" alt="${turf.name} Icon">
-                            <h3>${turf.name}</h3>
-                        </div>
-                    `;
-                    turfCardsContainer.innerHTML += turfCard;
-                });
-            });
-
-            // Fetch and display feedbacks
             fetch('http://localhost:3000/feedbacks')
             .then(response => response.json())
             .then(data => {

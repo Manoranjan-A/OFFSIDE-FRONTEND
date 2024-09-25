@@ -16,7 +16,7 @@
         }
 
         .overlay {
-            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better readability */
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 20px;
             height: 100vh;
             box-sizing: border-box;
@@ -45,12 +45,6 @@
             padding: 20px;
             border-radius: 10px;
             flex: 1;
-        }
-
-        .left-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         form {
@@ -93,7 +87,6 @@
             background-color: #218838;
         }
 
-        /* Improved layout for date, time, and payment info */
         .date-container {
             background-color: #222;
             padding: 30px;
@@ -128,24 +121,18 @@
 </head>
 <body>
     <div class="overlay" id="mainContent">
-        <!-- Header Section with Title -->
         <div class="header-section">
             <h1 class="title">Badminton</h1>
         </div>
 
-        <!-- Content Section with Date on the Left and Form on the Right -->
         <div class="content-section">
-            <!-- Left Section: Date, Time, and Payment Info -->
             <div class="left-section">
                 <div class="date-container">
-                    <!-- Display Selected Date Above Date Picker -->
                     <h2 id="selectedDate" style="color: #ddd;"></h2>
 
-                    <!-- Date Picker -->
                     <label for="datePicker">Choose Date:</label>
                     <input type="text" id="datePicker" placeholder="Select date">
 
-                    <!-- Time Range Sliders -->
                     <div class="time-slider">
                         <label for="startTimeSlider">Start Time:</label>
                         <input type="range" id="startTimeSlider" min="0" max="23" step="1" value="7" oninput="updateStartTime()">
@@ -158,45 +145,37 @@
                         <span id="endTime">8:00 AM</span>
                     </div>
 
-                    <!-- Display Timezone and Total Amount -->
                     <p>Timezone: GMT+05:30 Asia/Kolkata</p>
                     <p id="totalAmount">Total Amount: Rs 500</p>
                     <a href="#" class="button" id="proceedToPayment">Confirm Booking</a>
 
-                    <!-- Display Selected Time -->
                     <p id="selectedDetails"></p>
                 </div>
             </div>
 
-            <!-- Right Section: Form Inputs -->
             <div class="right-section">
-                <form>
+                <form id="bookingForm">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name">
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
                     
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name">
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
 
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
                     <label for="phone">Phone</label>
-                    <input id="phone" type="tel">
+                    <input id="phone" type="tel" required>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
     <script>
-        // Hourly rate
-        const hourlyRate = 500;
-
-        // Date picker initialization with display update
         $(function() {
             $("#datePicker").datepicker({
                 dateFormat: "DD, MM dd, yy",
@@ -208,7 +187,6 @@
             });
         });
 
-        // Initialize phone input with country flags
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
@@ -221,20 +199,15 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
         });
 
-        // Time slider logic
         function updateStartTime() {
-            const startTimeSlider = document.getElementById("startTimeSlider");
-            const startTimeLabel = document.getElementById("startTime");
-            const startHour = parseInt(startTimeSlider.value);
-            startTimeLabel.textContent = formatTime(startHour);
+            const startHour = parseInt(document.getElementById("startTimeSlider").value);
+            document.getElementById("startTime").textContent = formatTime(startHour);
             updateDisplay();
         }
 
         function updateEndTime() {
-            const endTimeSlider = document.getElementById("endTimeSlider");
-            const endTimeLabel = document.getElementById("endTime");
-            const endHour = parseInt(endTimeSlider.value);
-            endTimeLabel.textContent = formatTime(endHour);
+            const endHour = parseInt(document.getElementById("endTimeSlider").value);
+            document.getElementById("endTime").textContent = formatTime(endHour);
             updateDisplay();
         }
 
@@ -244,20 +217,14 @@
             return `${adjustedHour}:00 ${period}`;
         }
 
-        // Function to calculate the total amount based on selected time
         function calculateTotalAmount() {
             const startHour = parseInt(document.getElementById("startTimeSlider").value);
             const endHour = parseInt(document.getElementById("endTimeSlider").value);
-
-            // Calculate the total number of hours
             let hours = endHour - startHour;
-            if (hours < 0) hours += 24; // If the end time is before the start time (i.e., overnight event)
-
-            // Calculate the total cost
-            return hours * hourlyRate;
+            if (hours < 0) hours += 24;
+            return hours * 500;
         }
 
-        // Display selected date and time
         function updateDisplay() {
             const selectedDate = $('#datePicker').val();
             const startTime = $('#startTime').text();
@@ -270,26 +237,34 @@
             }
         }
 
-        // Set default time slider values
-        updateStartTime();
-        updateEndTime();
-
-        // Payment success logic
         document.getElementById("proceedToPayment").addEventListener("click", function(event) {
             event.preventDefault();
-            const firstName = document.getElementById("firstName").value;
-            const lastName = document.getElementById("lastName").value;
-
-            document.getElementById("mainContent").innerHTML = `
-                <div class="overlay">
-                    <div class="header-section">
-                        <h1 class="title">Booking Successful!</h1>
-                        <p>Thank you for booking your badminton event.</p>
-                        <a href="index2.html" class="button">Back to Home</a>
-                    </div>
-                </div>
-            `;
-        });
+        
+            // Collect the form data
+            const formData = {
+                firstName: document.getElementById("firstName").value,
+                lastName: document.getElementById("lastName").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                date: document.getElementById("selectedDate").textContent,
+                startTime: document.getElementById("startTime").textContent,
+                endTime: document.getElementById("endTime").textContent
+            };
+        
+            // Send the data to the server via POST request
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:4000/booking",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function(response) {
+                    alert("Booking successful!");
+                },
+                error: function(error) {
+                    alert("Booking failed, please try again.");
+                }
+            });
+        });        
     </script>
 </body>
 </html>
