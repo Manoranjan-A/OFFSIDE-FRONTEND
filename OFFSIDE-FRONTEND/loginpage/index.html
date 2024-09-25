@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Preconnect for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Oswald Font Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <!-- Link to your custom stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-image">
+            <img src="cricket.jpg" alt="Cricket field">
+        </div>
+        <div class="login-container">
+            <h1 class="title oswald-bold">OFFSIDE</h1>
+            <form>
+                <label for="email">Login</label>
+                <input type="text" id="email" name="email" placeholder="Email or phone number" required>
+
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    <span class="show-password">👁️</span>
+                </div>
+
+                <div class="options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn sign-in-btn">Sign in</button>
+
+                
+                <button type="button" class="btn google-btn">
+                    <span class="google-icon">G</span> Sign in with Google
+                </button>
+            </form>
+
+            <p class="signup-prompt">Don’t have an account? <a href="index1.html">Sign up now</a></p>
+        </div>
+    </div>
+</body>
+</html>

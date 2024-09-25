@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offside - Main Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic styles */
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #7BA33D;
+            padding: 15px;
+            text-align: left;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Turf category section */
+        .turf-category {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .turf-category h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .turf-cards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .turf-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 150px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .turf-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .turf-card img {
+            width: 60px;
+            margin-bottom: 10px;
+        }
+
+        .turf-card h3 {
+            font-size: 18px;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* What people love about us section */
+        .feedback-section {
+            background-color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .feedback-section h2 {
+            font-size: 26px;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        .feedback-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .feedback-card {
+            background-color: #e0e0e0;
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+        }
+
+        /* Feedback box */
+        .feedback-input {
+            margin-top: 40px;
+            padding: 10px;
+            width: 50%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .footer {
+            background-color: #ddd;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>OFFSIDE</h1>
+    </header>
+
+    <!-- Image Carousel Section -->
+    <div class="carousel">
+        <img src="turf.jpg" alt="Turf Image">
+    </div>
+
+    <!-- Turf Category Section -->
+    <section class="turf-category">
+        <h2>Turf Category</h2>
+        <div class="turf-cards">
+            <div class="turf-card">
+                <img src="football-icon.png" alt="Football">
+                <h3>Football</h3>
+            </div>
+            <div class="turf-card">
+                <img src="basketball-icon.jpg" alt="Basketball">
+                <h3>Basketball</h3>
+            </div>
+            <div class="turf-card">
+                <img src="cricket-icon.jpg" alt="Cricket">
+                <h3>Cricket</h3>
+            </div>
+            <div class="turf-card">
+                <img src="badminton-icon.jpg" alt="Badminton">
+                <h3>Badminton</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+        <h2>What people love about us!</h2>
+        <div class="feedback-cards">
+            <div class="feedback-card"></div>
+            <div class="feedback-card"></div>
+            <div class="feedback-card"></div>
+        </div>
+
+        <!-- Feedback Input Box -->
+        <div>
+            <input type="text" class="feedback-input" placeholder="Drop your feedback here ✎">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+
+</body>
+</html>
