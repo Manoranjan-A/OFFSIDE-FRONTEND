@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badminton Event</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('your-badminton-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better readability */
+            padding: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .content-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .left-section, .right-section {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, select {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #444;
+            color: white;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #ddd;
+        }
+
+        h2 {
+            color: #ddd;
+        }
+
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #218838;
+        }
+
+        /* Improved layout for date, time, and payment info */
+        .date-container {
+            background-color: #222;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #datePicker {
+            width: 100%;
+        }
+
+        .time-slider {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .time-slider label {
+            flex-basis: 30%;
+        }
+
+        .time-slider input[type="range"] {
+            flex-basis: 50%;
+        }
+
+        .time-slider span {
+            flex-basis: 20%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="mainContent">
+        <!-- Header Section with Title -->
+        <div class="header-section">
+            <h1 class="title">Badminton</h1>
+        </div>
+
+        <!-- Content Section with Date on the Left and Form on the Right -->
+        <div class="content-section">
+            <!-- Left Section: Date, Time, and Payment Info -->
+            <div class="left-section">
+                <div class="date-container">
+                    <!-- Display Selected Date Above Date Picker -->
+                    <h2 id="selectedDate" style="color: #ddd;"></h2>
+
+                    <!-- Date Picker -->
+                    <label for="datePicker">Choose Date:</label>
+                    <input type="text" id="datePicker" placeholder="Select date">
+
+                    <!-- Time Range Sliders -->
+                    <div class="time-slider">
+                        <label for="startTimeSlider">Start Time:</label>
+                        <input type="range" id="startTimeSlider" min="0" max="23" step="1" value="7" oninput="updateStartTime()">
+                        <span id="startTime">7:00 AM</span>
+                    </div>
+
+                    <div class="time-slider">
+                        <label for="endTimeSlider">End Time:</label>
+                        <input type="range" id="endTimeSlider" min="0" max="23" step="1" value="8" oninput="updateEndTime()">
+                        <span id="endTime">8:00 AM</span>
+                    </div>
+
+                    <!-- Display Timezone and Total Amount -->
+                    <p>Timezone: GMT+05:30 Asia/Kolkata</p>
+                    <p id="totalAmount">Total Amount: Rs 500</p>
+                    <a href="#" class="button" id="proceedToPayment">Confirm Booking</a>
+
+                    <!-- Display Selected Time -->
+                    <p id="selectedDetails"></p>
+                </div>
+            </div>
+
+            <!-- Right Section: Form Inputs -->
+            <div class="right-section">
+                <form>
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name">
+                    
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name">
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
+
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="tel">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+    <script>
+        // Hourly rate
+        const hourlyRate = 500;
+
+        // Date picker initialization with display update
+        $(function() {
+            $("#datePicker").datepicker({
+                dateFormat: "DD, MM dd, yy",
+                minDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    $('#selectedDate').text(dateText);
+                    updateDisplay();
+                }
+            });
+        });
+
+        // Initialize phone input with country flags
+        const phoneInput = document.querySelector("#phone");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function(success, failure) {
+                fetch('https://ipinfo.io?token=YOUR_TOKEN')
+                    .then(response => response.json())
+                    .then(data => success(data.country))
+                    .catch(() => success('us'));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+
+        // Time slider logic
+        function updateStartTime() {
+            const startTimeSlider = document.getElementById("startTimeSlider");
+            const startTimeLabel = document.getElementById("startTime");
+            const startHour = parseInt(startTimeSlider.value);
+            startTimeLabel.textContent = formatTime(startHour);
+            updateDisplay();
+        }
+
+        function updateEndTime() {
+            const endTimeSlider = document.getElementById("endTimeSlider");
+            const endTimeLabel = document.getElementById("endTime");
+            const endHour = parseInt(endTimeSlider.value);
+            endTimeLabel.textContent = formatTime(endHour);
+            updateDisplay();
+        }
+
+        function formatTime(hour) {
+            const period = hour < 12 ? 'AM' : 'PM';
+            const adjustedHour = hour % 12 || 12;
+            return `${adjustedHour}:00 ${period}`;
+        }
+
+        // Function to calculate the total amount based on selected time
+        function calculateTotalAmount() {
+            const startHour = parseInt(document.getElementById("startTimeSlider").value);
+            const endHour = parseInt(document.getElementById("endTimeSlider").value);
+
+            // Calculate the total number of hours
+            let hours = endHour - startHour;
+            if (hours < 0) hours += 24; // If the end time is before the start time (i.e., overnight event)
+
+            // Calculate the total cost
+            return hours * hourlyRate;
+        }
+
+        // Display selected date and time
+        function updateDisplay() {
+            const selectedDate = $('#datePicker').val();
+            const startTime = $('#startTime').text();
+            const endTime = $('#endTime').text();
+            const totalAmount = calculateTotalAmount();
+
+            if (selectedDate) {
+                $('#selectedDetails').text(`Event from ${startTime} to ${endTime}`);
+                $('#totalAmount').text(`Total Amount: Rs ${totalAmount}`);
+            }
+        }
+
+        // Set default time slider values
+        updateStartTime();
+        updateEndTime();
+
+        // Payment success logic
+        document.getElementById("proceedToPayment").addEventListener("click", function(event) {
+            event.preventDefault();
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+
+            document.getElementById("mainContent").innerHTML = `
+                <div class="overlay">
+                    <div class="header-section">
+                        <h1 class="title">Booking Successful!</h1>
+                        <p>Thank you for booking your badminton event.</p>
+                        <a href="index2.html" class="button">Back to Home</a>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

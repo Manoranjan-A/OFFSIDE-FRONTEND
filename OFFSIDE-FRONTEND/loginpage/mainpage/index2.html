@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offside - Main Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic styles */
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #fff;
+        }
+
+        header {
+            background-color: #7BA33D;
+            padding: 15px;
+            text-align: left;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* Background Image */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: url('turf.jpg') center/cover no-repeat;
+        }
+        
+        /* Turf category section */
+        .turf-category {
+            padding: 40px 20px;
+            text-align: center;
+            background: url('turf1.jpg') center/cover no-repeat;
+            position: relative;
+            color: #fff;
+        }
+
+        .turf-category h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .turf-cards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .turf-card {
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 10px;
+            width: 150px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            color: #fff;
+        }
+
+        .turf-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .turf-card img {
+            width: 60px;
+            margin-bottom: 10px;
+        }
+
+        .turf-card h3 {
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* What people love about us section */
+        .feedback-section {
+            background-color: #121212;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .feedback-section h2 {
+            font-size: 26px;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        .feedback-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feedback-card {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .feedback-card img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .feedback-card h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .feedback-card p {
+            font-size: 14px;
+        }
+
+        /* Feedback input */
+        .feedback-input {
+            margin-top: 40px;
+            padding: 10px;
+            width: 50%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .submit-feedback {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #7BA33D;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Contact Info */
+        .footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer h3 {
+            margin-bottom: 10px;
+        }
+
+        .footer p, .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-icons {
+            margin-top: 10px;
+        }
+
+        .footer-icons img {
+            width: 30px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .turf-card a {
+            color: inherit; /* Inherit text color */
+            text-decoration: none; /* Remove underline */
+            display: block; /* Make the anchor fill the card */
+            height: 100%; /* Ensure full height */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>OFFSIDE</h1>
+    </header>
+
+    <!-- Image Carousel Section -->
+    <div class="carousel"></div>
+
+    <!-- Turf Category Section -->
+    <main>
+        <section class="turf-category">
+            <h2>Turf Category</h2>
+            <div class="turf-cards">
+                <div class="turf-card">
+                    <img src="football-icon.png" alt="Football Icon">
+                    <h3>Football</h3>
+                </div>
+                <div class="turf-card">
+                    <img src="basketball-icon.jpg" alt="Basketball Icon">
+                    <h3>Basketball</h3>
+                </div>
+                <div class="turf-card">
+                    <a href="booking.html">
+                        <img src="badminton-icon.jpg" alt="Badminton Icon">
+                        <h3>Badminton</h3>
+                    </a>
+                </div>
+                <div class="turf-card">
+                    <img src="cricket-icon.jpg" alt="Cricket Icon">
+                    <h3>Cricket</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section class="feedback-section">
+            <h2>What people love about us!</h2>
+            <div class="feedback-cards" id="feedbackCards">
+                <div class="feedback-card">
+                    <img src="profile1.jpg" alt="User 1">
+                    <h3>Sandhiya R</h3>
+                    <p>“Love playing badminton. Well maintained. Best place for sports.”</p>
+                </div>
+                <div class="feedback-card">
+                    <img src="profile2.png" alt="User 2">
+                    <h3>Yohith N</h3>
+                    <p>“Great roofing, makes it easier to play at noon.”</p>
+                </div>
+                <div class="feedback-card">
+                    <img src="profile3.jpg" alt="User 3">
+                    <h3>Vinithaa P</h3>
+                    <p>“Well maintained cricket field under floodlights.”</p>
+                </div>
+            </div>
+
+            <!-- Feedback Input Box -->
+            <div>
+                <input type="text" class="feedback-input" id="feedbackInput" placeholder="Drop your feedback here ✎">
+                <button class="submit-feedback" id="submitFeedback">Submit Feedback</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <h3>Contact Us</h3>
+        <p>Peelamedu, Coimbatore - 641004</p>
+        <p>Phone: +91 9940xxxxx</p>
+
+        <div class="footer-icons">
+            <img src="facebook-icon.png" alt="Facebook Icon">
+            <img src="instagram-icon.png" alt="Instagram Icon">
+            <img src="youtube-icon.png" alt="YouTube Icon">
+        </div>
+    </footer>
+
+    <!-- JavaScript to handle feedback submission -->
+    <script>
+        document.getElementById('submitFeedback').addEventListener('click', function() {
+            // Get the feedback input value
+            var feedbackInput = document.getElementById('feedbackInput').value;
+            var userName = localStorage.getItem('username'); // Retrieve the username from localStorage
+    
+            // Ensure there's feedback entered and the user is logged in
+            if (feedbackInput.trim() !== "" && userName) {
+                // Create a new feedback card
+                var newFeedbackCard = document.createElement('div');
+                newFeedbackCard.classList.add('feedback-card');
+                newFeedbackCard.innerHTML = `
+                    <img src="default-user.jpg" alt="User">
+                    <h3>${userName}</h3>
+                    <p>"${feedbackInput}"</p>
+                `;
+    
+                // Append the new feedback card to the feedback section
+                document.getElementById('feedbackCards').appendChild(newFeedbackCard);
+    
+                // Clear the input box
+                document.getElementById('feedbackInput').value = "";
+            } else {
+                alert("Please enter your feedback and ensure you are logged in.");
+            }
+        });
+    </script>
+</body>
+</html>
